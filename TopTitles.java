@@ -175,7 +175,7 @@ public class TopTitles extends Configured implements Tool {
         @Override
         protected void cleanup(Context context) throws IOException, InterruptedException {
             //TODO
-            for (Pair<Integer, String> item : countToWordMap) {
+            for (Pair<Integer, String> item : countToTitleMap) {
                 String[] strings = {item.second, item.first.toString()};
                 TextArrayWritable val = new TextArrayWritable(strings);
                 context.write(NullWritable.get(), val);
