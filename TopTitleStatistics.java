@@ -220,7 +220,7 @@ public class TopTitleStatistics extends Configured implements Tool {
                 //Text word = new Text(item.second);
                 IntWritable value = new IntWritable(item.first);
                 topTenVals[idx] = value;
-                sum += value;
+                sum += value.get();
                 idx += 1;
             }
             
@@ -228,7 +228,8 @@ public class TopTitleStatistics extends Configured implements Tool {
             min = sum;
             max = 0;
             var = 0;
-            for(IntWritable val : topTenVals) {
+            for(IntWritable value : topTenVals) {
+                val = value.get();
                 if (val < min) {
                     min = val;
                 }
