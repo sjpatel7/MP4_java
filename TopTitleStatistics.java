@@ -229,7 +229,7 @@ public class TopTitleStatistics extends Configured implements Tool {
             max = 0;
             var = 0;
             for(IntWritable value : topTenVals) {
-                val = value.get();
+                Integer val = value.get();
                 if (val < min) {
                     min = val;
                 }
