@@ -165,7 +165,7 @@ public class TopPopularLinks extends Configured implements Tool {
                     countToPageMap.remove(countToPageMap.first());   
                 }
             }
-            for (Pair<Integer, Integer> item : countToTitleMap) {
+            for (Pair<Integer, Integer> item : countToPageMap) {
                 IntWritable page = new IntWritable(item.second);
                 IntWritable value = new IntWritable(item.first);
                 context.write(page, value);
