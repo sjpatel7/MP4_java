@@ -204,7 +204,9 @@ public class PopularityLeague extends Configured implements Tool {
                 //context.write(page, value);
             }
             
-            for (Pair<Integer, Integer> item : outputOrder) {
+            Iterator<Pair<Integer, Integer>> des = outputOrder.descendingIterator();
+            while (des.hasNext()) {
+                item = des.next();
                 IntWritable page = new IntWritable(item.first);
                 IntWritable value = new IntWritable(item.second);
                 context.write(page, value);
