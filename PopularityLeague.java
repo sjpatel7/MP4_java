@@ -207,9 +207,10 @@ public class PopularityLeague extends Configured implements Tool {
                 Pair<Integer, Integer> item = c.next();
                 Integer page = item.second;
                 Integer count = item.first;
-                if (count == lastCount) {
+                if (count > lastCount) {
                     rank += 1;                    
                 }
+                lastCount = count;
                 rankOrder.add(new Pair<Integer, Integer>(page, rank));                   
             }
             
