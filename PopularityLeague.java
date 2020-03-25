@@ -195,11 +195,21 @@ public class PopularityLeague extends Configured implements Tool {
                 
                 countToPageMap.add(new Pair<Integer, Integer>(count, page));
             }
+            //holds <pid, ct>
+            TreeSet<Pair<Integer, Integer>> outputOrder = new TreeSet<Pair<Integer, Integer>>();
             for (Pair<Integer, Integer> item : countToPageMap) {
                 IntWritable page = new IntWritable(item.second);
                 IntWritable value = new IntWritable(item.first);
+                outputOrder.add(new Pair<Integer, Integer>(page, value));
+                //context.write(page, value);
+            }
+            
+            for (Pair<Integer, Integer> item : outputOrder) {
+                IntWritable page = new IntWritable(item.first);
+                IntWritable value = new IntWritable(item.second);
                 context.write(page, value);
             }
+            
             //context.write(<Text>, <IntWritable>); // print as final output
         }
 
