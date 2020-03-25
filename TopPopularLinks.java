@@ -137,7 +137,7 @@ public class TopPopularLinks extends Configured implements Tool {
             Integer page = Integer.parseInt(key.toString());
             
             countToPageMap.add(new Pair<Integer, Integer>(count, page));
-            if (countToPageMap.size() > 5) {
+            if (countToPageMap.size() > 10) {
                 countToPageMap.remove(countToPageMap.first());   
             }
         }
@@ -169,7 +169,7 @@ public class TopPopularLinks extends Configured implements Tool {
                 Integer count = pair[1].get();
                 
                 countToPageMap.add(new Pair<Integer, Integer>(count, page));
-                if (countToPageMap.size() > 5) {
+                if (countToPageMap.size() > 10) {
                     countToPageMap.remove(countToPageMap.first());   
                 }
             }
