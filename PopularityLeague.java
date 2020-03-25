@@ -149,7 +149,8 @@ public class PopularityLeague extends Configured implements Tool {
             Configuration conf = context.getConfiguration();
             
             String leaguePath = conf.get("league");
-            this.league = Arrays.asList(readHDFSFile(leaguePath, conf).split("\n"));
+            List<String> temp = Arrays.asList(readHDFSFile(leaguePath, conf).split("\n"));
+            league = temp.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
         }
         //TODO
         //countToPageMap holds <Count, Page> pairs
