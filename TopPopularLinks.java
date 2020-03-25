@@ -55,7 +55,7 @@ public class TopPopularLinks extends Configured implements Tool {
         jobB.setOutputValueClass(IntWritable.class);
 
         jobB.setMapOutputKeyClass(NullWritable.class);
-        jobB.setMapOutputValueClass(TextArrayWritable.class);
+        jobB.setMapOutputValueClass(IntArrayWritable.class);
 
         jobB.setMapperClass(TopLinksMap.class);
         jobB.setReducerClass(TopLinksReduce.class);
@@ -154,11 +154,11 @@ public class TopPopularLinks extends Configured implements Tool {
         //countToPageMap holds <Count, Page> pairs
         private TreeSet<Pair<Integer, String>> countToPageMap = new TreeSet<Pair<Integer, Integer>>();
         @Override
-        public void reduce(NullWritable key, Iterable<TextArrayWritable> values, Context context) throws IOException, InterruptedException {
-            for (TextArrayWritable val : values) {
-                Text[] pair = (Text[]) val.toArray();
-                Integer page = Integer.parseInt(pair[0].toString());
-                Integer count = Integer.parseInt(pair[1].toString());
+        public void reduce(NullWritable key, Iterable<IntArrayWritable> values, Context context) throws IOException, InterruptedException {
+            for (IntArrayWritable val : values) {
+                IntWritable[] pair = (IntWritable[]) val.toArray();
+                Integer page = pair[0].get();
+                Integer count = pair[1].get();
                 
                 countToPageMap.add(new Pair<Integer, Integer>(count, page));
                 if (countToPageMap.size() > 5) {
