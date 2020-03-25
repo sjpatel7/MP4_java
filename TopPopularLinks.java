@@ -106,8 +106,7 @@ public class TopPopularLinks extends Configured implements Tool {
                 context.write(new IntWritable(child), new IntWritable(1));
             }
             //context.write(<IntWritable>, <IntWritable>); // pass this output to reducer
-        }
-        
+        }  
     }
 
     public static class LinkCountReduce extends Reducer<IntWritable, IntWritable, IntWritable, IntWritable> {
@@ -140,6 +139,15 @@ public class TopPopularLinks extends Configured implements Tool {
             countToPageMap.add(new Pair<Integer, Integer>(count, page));
             if (countToPageMap.size() > 5) {
                 countToPageMap.remove(countToPageMap.first());   
+            }
+        }
+        @Override
+        protected void cleanup(Context context) throws IOException, InterruptedException {
+            //TODO
+            for (Pair<Integer, Integer> item : countToPageMap) {
+                Integer[] ints = {item.second, item.first};
+                IntArrayWritable val = new IntArrayWritable(ints);
+                context.write(NullWritable.get(), val);
             }
         }
     }
