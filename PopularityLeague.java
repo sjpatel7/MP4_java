@@ -210,7 +210,7 @@ public class PopularityLeague extends Configured implements Tool {
             Integer rank = 0;
             Pair<Integer, Integer> firstRank = c.next();
             Integer lastCount = firstRank.first;
-            rankOrder.add(firstRank.second, new Integer(0));
+            rankOrder.add(new Pair<Integer, Integer>(firstRank.second, new Integer(0)));
             while (c.hasNext()) {
                 Pair<Integer, Integer> item = c.next();
                 Integer page = item.second;
@@ -218,11 +218,10 @@ public class PopularityLeague extends Configured implements Tool {
                 if (count > lastCount) {
                     rank = rank + 1;                    
                 }
-                rankOrder.add(page, rank);                   
+                rankOrder.add(new Pair<Integer, Integer>(page, rank));                   
             }
             
             Iterator<Pair<Integer, Integer>> des = rankOrder.descendingIterator();
-            int rank = 0;
             while (des.hasNext()) {
                 Pair<Integer, Integer> item = des.next();
                 
