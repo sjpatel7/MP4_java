@@ -59,8 +59,8 @@ public class PopularityLeague extends Configured implements Tool {
         jobB.setMapOutputKeyClass(NullWritable.class);
         jobB.setMapOutputValueClass(IntArrayWritable.class);
 
-        jobB.setMapperClass(TopLinksMap.class);
-        jobB.setReducerClass(TopLinksReduce.class);
+        jobB.setMapperClass(PopularityLeagueMap.class);
+        jobB.setReducerClass(PopularityLeagueReduce.class);
         jobB.setNumReduceTasks(1);
 
         FileInputFormat.setInputPaths(jobB, tmpPath);
@@ -69,7 +69,7 @@ public class PopularityLeague extends Configured implements Tool {
         jobB.setInputFormatClass(KeyValueTextInputFormat.class);
         jobB.setOutputFormatClass(TextOutputFormat.class);
 
-        jobB.setJarByClass(TopPopularLinks.class);
+        jobB.setJarByClass(PopularityLeague.class);
         return jobB.waitForCompletion(true) ? 0 : 1;
     }
 
