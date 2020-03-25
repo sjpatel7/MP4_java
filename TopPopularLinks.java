@@ -131,7 +131,7 @@ public class TopPopularLinks extends Configured implements Tool {
         }
         //TODO
         //countToPageMap holds <Count, Page> pairs
-        private TreeSet<Pair<Integer, String>> countToPageMap = new TreeSet<Pair<Integer, Integer>>();
+        private TreeSet<Pair<Integer, Integer>> countToPageMap = new TreeSet<Pair<Integer, Integer>>();
         @Override
         public void map(Text key, Text value, Context context) throws IOException, InterruptedException {
             Integer count = Integer.parseInt(value.toString());
@@ -152,7 +152,7 @@ public class TopPopularLinks extends Configured implements Tool {
         }
         //TODO
         //countToPageMap holds <Count, Page> pairs
-        private TreeSet<Pair<Integer, String>> countToPageMap = new TreeSet<Pair<Integer, Integer>>();
+        private TreeSet<Pair<Integer, Integer>> countToPageMap = new TreeSet<Pair<Integer, Integer>>();
         @Override
         public void reduce(NullWritable key, Iterable<IntArrayWritable> values, Context context) throws IOException, InterruptedException {
             for (IntArrayWritable val : values) {
