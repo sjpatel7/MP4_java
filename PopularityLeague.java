@@ -216,7 +216,7 @@ public class PopularityLeague extends Configured implements Tool {
                 Integer page = item.second;
                 Integer count = item.first;
                 if (count > lastCount) {
-                    rank = rank + 1                    
+                    rank = rank + 1;                    
                 }
                 rankOrder.add(page, rank);                   
             }
