@@ -195,14 +195,6 @@ public class PopularityLeague extends Configured implements Tool {
                 
                 countToPageMap.add(new Pair<Integer, Integer>(count, page));
             }
-            //holds <pid, ct>
-            TreeSet<Pair<Integer, Integer>> outputOrder = new TreeSet<Pair<Integer, Integer>>();
-            for (Pair<Integer, Integer> item : countToPageMap) {
-                Integer page = item.second;
-                Integer value = item.first;
-                outputOrder.add(new Pair<Integer, Integer>(page, value));
-                //context.write(page, value);
-            }
             
             //holds <pid, rank>
             TreeSet<Pair<Integer, Integer>> rankOrder = new TreeSet<Pair<Integer, Integer>>();
@@ -216,9 +208,9 @@ public class PopularityLeague extends Configured implements Tool {
                 Integer page = item.second;
                 Integer count = item.first;
                 if (count > lastCount) {
-                    rank = rank + 1;                    
+                    rank += 1;                    
                 }
-                rankOrder.add(new Pair<Integer, Integer>(page, rank));                   
+                rankOrder.add(new Pair<Integer, Integer>(page, count));                   
             }
             
             Iterator<Pair<Integer, Integer>> des = rankOrder.descendingIterator();
