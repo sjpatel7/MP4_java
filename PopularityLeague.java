@@ -143,14 +143,16 @@ public class PopularityLeague extends Configured implements Tool {
     
     //these clases are based on TopPopular links and TopTitles
     public static class PopularityLeagueMap extends Mapper<Text, Text, NullWritable, IntArrayWritable> {
-        List<Integer> league;
+        List<Integer> league = new ArrayList<>();
         @Override
         protected void setup(Context context) throws IOException,InterruptedException {
             Configuration conf = context.getConfiguration();
             
             String leaguePath = conf.get("league");
             List<String> temp = Arrays.asList(readHDFSFile(leaguePath, conf).split("\n"));
-            league = temp.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+            for (String id :temp) {
+                league.add(Integer.parseInt(id));
+            }
         }
         //TODO
         //countToPageMap holds <Count, Page> pairs
