@@ -204,15 +204,32 @@ public class PopularityLeague extends Configured implements Tool {
                 //context.write(page, value);
             }
             
-            Iterator<Pair<Integer, Integer>> des = outputOrder.descendingIterator();
+            //holds <pid, rank>
+            TreeSet<Pair<Integer, Integer>> rankOrder = new TreeSet<Pair<Integer, Integer>>();
+            Iterator<Pair<Integer, Integer>> c = countToPageMap.iterator();
+            Integer rank = 0;
+            Pair<Integer, Integer> firstRank = c.next();
+            Integer lastCount = firstRank.first;
+            rankOrder.add(firstRank.second, new Integer(0));
+            while (c.hasNext()) {
+                Pair<Integer, Integer> item = c.next();
+                Integer page = item.second;
+                Integer count = item.first;
+                if (count > lastCount) {
+                    rank = rank + 1                    
+                }
+                rankOrder.add(page, rank);                   
+            }
+            
+            Iterator<Pair<Integer, Integer>> des = rankOrder.descendingIterator();
+            int rank = 0;
             while (des.hasNext()) {
                 Pair<Integer, Integer> item = des.next();
+                
                 IntWritable page = new IntWritable(item.first);
                 IntWritable value = new IntWritable(item.second);
                 context.write(page, value);
             }
-            
-            //context.write(<Text>, <IntWritable>); // print as final output
         }
 
     }
